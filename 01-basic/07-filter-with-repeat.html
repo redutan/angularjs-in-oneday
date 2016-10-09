@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+  <script type="text/javascript">
+    var myApp = angular.module('myApp', []);
+    myApp.controller('MainCtrl', ['$scope', function ($scope) {
+      $scope.numbers = [10, 25, 35, 45, 60, 90, 100];
+      $scope.lowerBound = 42;
+      // scope 내 필터
+      $scope.greaterThanNum = function (item) {
+        return item > $scope.lowerBound;
+      };
+    }]);
+  </script>
+</head>
+<body>
+<div ng-app="myApp">
+  <div ng-controller="MainCtrl">
+    <li ng-repeat="number in numbers | filter:greaterThanNum">
+      {{number}}
+    </li>
+  </div>
+</div>
+</body>
+</html>

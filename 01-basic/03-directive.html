@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+  <script type="text/javascript">
+    var myApp = angular.module('myApp', []);
+    myApp.directive('customButton', function () {
+      return {
+        restrict: 'A',  // A:attribute, E:element, C:class, M:comment - DEFAULT:'EA'
+        replace: true,
+        transclude: true,
+        template: '<a href="" class="myawesomebutton" ng-transclude>' +
+        '<i class="icon-ok-sign"></i>' +
+        '</a>',
+        link: function (scope, element, attrs) {
+          // Dome 조작과 이벤트 설정은 여기서
+        }
+      }
+    });
+  </script>
+</head>
+<body>
+<div ng-app="myApp">
+  <a custom-button>Click me</a>
+</div>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+  <script type="text/javascript">
+    var myApp = angular.module('myApp', []);
+    // 전역 필터
+    myApp.filter('reverse', function () {
+      return function (input, uppercase) {
+        var out = '';
+        for (var i = 0; i < input.length; i++) {
+          out = input.charAt(i) + out;
+        }
+        if (uppercase) {
+          out = out.toUpperCase();
+        }
+        return out;
+      }
+    });
+    myApp.controller('MainCtrl', ['$scope', function ($scope) {
+      $scope.greeting = 'Todd Motto';
+    }]);
+  </script>
+</head>
+<body>
+<div ng-app="myApp">
+  <div ng-controller="MainCtrl">
+    <p>No filter: {{greeting}}</p>
+
+    <p>Reverse: {{greeting|reverse}}</p>
+  </div>
+</div>
+</body>
+</html>

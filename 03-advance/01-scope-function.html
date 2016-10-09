@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+  <script type="text/javascript">
+    var myApp = angular.module('myApp', []);
+    myApp.controller('EmailsCtrl', ['$scope', '$http', function ($scope, $http) {
+      $scope.emails = [];
+
+      $http({
+        method: 'GET',
+        url: 'data/emails.json'
+      }).success(function (data, status, headers, config) {
+        // 서버로부터 받아온 사용자 이름을 모델에 할당
+        $scope.emails = data;
+      }).error(function (data, status, headers, config) {
+        alert(status);
+      });
+
+      $scope.deleteEmail = function (index) {
+        $scope.emails.splice(index, 1);
+      }
+
+    }]);
+  </script>
+</head>
+<body>
+<div ng-app="myApp">
+  <div ng-controller="EmailsCtrl">
+    <ul>
+      <li ng-repeat="email in emails">
+        <p>From : {{email.from}}</p>
+
+        <p>Subject : {{email.subject}}</p>
+
+        <p>{{email.sent | date:'MMM d, y h:mm:ss a'}}</p>
+        <a ng-click="deleteEmail($index)">Delete email</a>
+      </li>
+    </ul>
+  </div>
+</div>
+</body>
+</html>
